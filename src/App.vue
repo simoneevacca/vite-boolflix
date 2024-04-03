@@ -1,12 +1,14 @@
 <script>
-  import { state } from '../state.js';
-  import searchBar from './components/searchbar.vue'
+  import { state } from '../state.js'
+  import AppHeader from './components/AppHeader.vue'
+  import AppMain from './components/AppMain.vue'
 
 
   export default{
     
     components: {
-      searchBar
+      AppHeader,
+      AppMain
     },
     data(){
       return{
@@ -14,16 +16,15 @@
         
       }
     },
-    mounted() {
-      state.GetContent('https://api.themoviedb.org/3/search/movie?api_key=41b23e11302057b0778ead19acd303ef&query=avatar&include_adult=false&language=it&page=1')
-      
-    }
+    
   }
 </script>
 
 <template>
   
-  <searchBar />
+  <AppHeader />
+  <AppMain />
+
 </template>
 
 <style>
