@@ -3,16 +3,16 @@ import { reactive } from 'vue'
 import axios from 'axios';
 
 export const state = reactive({
-    test: 'hello',
+   
 
-    content: [],
+    contents: [],
 
     GetContent(url) {
 
         axios.get(url)
             .then(response => {
-                this.content = response.data
-                console.log(response);
+                this.contents = response.data
+                // console.log(response.data);
             })
     }
 })
