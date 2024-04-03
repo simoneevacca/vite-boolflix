@@ -6,13 +6,21 @@ export const state = reactive({
    
 
     contents: [],
+   
 
     GetContent(url) {
 
         axios.get(url)
             .then(response => {
-                this.contents.push(response.data)
-                console.log(response.data);
+                this.contents = response.data
+                
+                console.log(this.contents);
+                
+            }),
+            
+            this.contents.forEach(element => {
+                console.log(element);
             })
+
     }
 })
