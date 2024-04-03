@@ -17,7 +17,8 @@ export default {
 
     methods: {
         searchContent() {
-            state.GetContent(`https://api.themoviedb.org/3/search/movie?api_key=41b23e11302057b0778ead19acd303ef&query=${this.search}&include_adult=false&language=it&page=1`)
+            state.GetContentMovies(`https://api.themoviedb.org/3/search/movie?api_key=41b23e11302057b0778ead19acd303ef&query=${this.search}&include_adult=false&language=it&page=1`)
+            state.GetContentTv(`https://api.themoviedb.org/3/search/tv?api_key=41b23e11302057b0778ead19acd303ef&query=${this.search}&include_adult=false&language=it&page=1`)
 
         }
     },
@@ -34,16 +35,24 @@ export default {
 
 
 
-    <div v-for="item in state.contentElement">
+    <div v-for="item in state.contentElementMovies">
         <div class="card">
             <div>{{ item.title }}</div>
             <div>{{ item.original_title }}</div>
-            <lang-flag :iso="item.original_language" />
+            <div v-if="true"><lang-flag :iso="item.original_language" /></div>
+            <div v-else>{{item.original_language}}</div>
             <div>{{ item.vote_average }}</div>
-            
-
         </div>
+    </div>
 
+    <div v-for="item in state.contentElementTv">
+        <div class="card">
+            <div>{{ item.name }}</div>
+            <div>{{ item.original_name }}</div>
+            <div v-if="true"><lang-flag :iso="item.original_language" /></div>
+            <div v-else>{{item.original_language}}</div>
+            <div>{{ item.vote_average }}</div>
+        </div>
     </div>
 
 
