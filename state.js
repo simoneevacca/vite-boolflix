@@ -1,6 +1,6 @@
 // store.js
 import { reactive } from 'vue'
 
-export const store = reactive({
+export const state = reactive({
   test: 'hello'
 })
