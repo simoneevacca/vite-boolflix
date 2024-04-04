@@ -12,22 +12,20 @@ export const state = reactive({
 
     GetContentMovies(url) {
         this.contentElementMovies = []
-        this.contentElementTv = []
-
-
         axios.get(url)
             .then(response => {
                 this.contents = response.data
-
+                
                 console.log(this.contents);
                 this.contents.results.forEach(element => {
                     this.contentElementMovies.push(element)
                 })
                 console.log(this.contentElementMovies);
             })
-    },
-
-    GetContentTv(url) {
+        },
+        
+        GetContentTv(url) {
+        this.contentElementTv = []
         axios.get(url)
             .then(response => {
                 this.contents = response.data

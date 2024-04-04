@@ -31,7 +31,7 @@ export default {
 </script>
 
 <template>
-    <input type="text" v-model="search">
+    <input type="text" v-model="search" @keyup.enter="searchContent">
     <button @click="searchContent"> cerca </button>
 
 
@@ -43,7 +43,7 @@ export default {
             <div>{{ item.original_title }}</div>
             <div v-if="true"><lang-flag :iso="item.original_language" /></div>
             <div v-else>{{ item.original_language }}</div>
-            <div>{{ item.vote_average }}</div>
+            <div>{{ Math.round(item.vote_average/2) }}</div>
         </div>
     </div>
 
@@ -51,12 +51,11 @@ export default {
     <div v-for="item in state.contentElementTv">
         <div class="card">
             <div><img :src="prefixImage + item.poster_path" alt=""></div>
-
             <div>{{ item.name }}</div>
             <div>{{ item.original_name }}</div>
             <div v-if="true"><lang-flag :iso="item.original_language" /></div>
             <div v-else>{{ item.original_language }}</div>
-            <div>{{ item.vote_average }}</div>
+            <div>{{ Math.round(item.vote_average/2) }}</div>
         </div>
     </div>
 
