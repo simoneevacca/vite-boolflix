@@ -42,9 +42,10 @@ export default {
             <div>{{ item.title }}</div>
             <div>{{ item.original_title }}</div>
             <div v-if="true"><lang-flag :iso="item.original_language" /></div>
-            <div v-else>{{ item.original_language }}</div>
-            <div>{{ Math.round(item.vote_average/2) }}</div>
-            <div v-for="n in Math.round(item.vote_average/2)">{{ n }}</div>
+            <div v-else>{{ item.original_language }}</div>            <div v-for="n in Math.round(item.vote_average/2)"><i class="fa-solid fa-star"></i></div>
+            <div v-for="n in 5-Math.round(item.vote_average/2)"><i class="fa-regular fa-star"></i></div>
+
+
 
         </div>
     </div>
@@ -56,9 +57,9 @@ export default {
             <div>{{ item.name }}</div>
             <div>{{ item.original_name }}</div>
             <div v-if="true"><lang-flag :iso="item.original_language" /></div>
-            <div v-else>{{ item.original_language }}</div>
-            <div>{{ Math.round(item.vote_average/2) }}</div>
-            <div v-for="n in Math.round(item.vote_average/2)">{{ n }}</div>
+            <div v-else>{{ item.original_language }}</div>            <div v-for="n in Math.round(item.vote_average/2)"><i class="fa-solid fa-star"></i></div>
+            <div v-for="n in 5-Math.round(item.vote_average/2)"><i class="fa-regular fa-star"></i></div>
+
         </div>
     </div>
 
