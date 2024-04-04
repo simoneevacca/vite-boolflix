@@ -34,38 +34,102 @@ export default {
     <input type="text" v-model="search" @keyup.enter="searchContent">
     <button @click="searchContent"> cerca </button>
 
-
-    <!-- show movie -->
-    <div v-for="item in state.contentElementMovies">
-        <div class="card">
-            <div><img :src="prefixImage + item.poster_path" alt=""></div>
-            <div>{{ item.title }}</div>
-            <div>{{ item.original_title }}</div>
-            <div v-if="true"><lang-flag :iso="item.original_language" /></div>
-            <div v-else>{{ item.original_language }}</div>            <div v-for="n in Math.round(item.vote_average/2)"><i class="fa-solid fa-star"></i></div>
-            <div v-for="n in 5-Math.round(item.vote_average/2)"><i class="fa-regular fa-star"></i></div>
-
-
-
+    <main>
+        <!-- show movie -->
+        <div class="container">
+            <div class="row">
+                <div class="col" v-for="item in state.contentElementMovies">
+                    <div class="card">
+                        <div class="poster"><img :src="prefixImage + item.poster_path" alt="">
+                            <div class="text">
+                                <div>{{ item.title }}</div>
+                                <div>{{ item.original_title }}</div>
+                                <div v-if="true"><lang-flag :iso="item.original_language" /></div>
+                                <div v-else>{{ item.original_language }}</div>
+                                <div v-for="n in Math.round(item.vote_average / 2)"><i class="fa-solid fa-star"></i>
+                                </div>
+                                <div v-for="n in 5 - Math.round(item.vote_average / 2)"><i
+                                        class="fa-regular fa-star"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- show tv series -->
-    <div v-for="item in state.contentElementTv">
-        <div class="card">
-            <div><img :src="prefixImage + item.poster_path" alt=""></div>
-            <div>{{ item.name }}</div>
-            <div>{{ item.original_name }}</div>
-            <div v-if="true"><lang-flag :iso="item.original_language" /></div>
-            <div v-else>{{ item.original_language }}</div>            <div v-for="n in Math.round(item.vote_average/2)"><i class="fa-solid fa-star"></i></div>
-            <div v-for="n in 5-Math.round(item.vote_average/2)"><i class="fa-regular fa-star"></i></div>
+        <!-- show tv series -->
+        <div class="container">
+            <div class="row">
 
+                <div class="col" v-for="item in state.contentElementTv">
+                    <div class="card">
+                        <div class="poster"><img :src="prefixImage + item.poster_path" alt="">
+                            <div class="text">
+                                <div>{{ item.name }}</div>
+                                <div>{{ item.original_name }}</div>
+                                <div v-if="true"><lang-flag :iso="item.original_language" /></div>
+                                <div v-else>{{ item.original_language }}</div>
+                                <div v-for="n in Math.round(item.vote_average / 2)"><i class="fa-solid fa-star"></i>
+                                </div>
+                                <div v-for="n in 5 - Math.round(item.vote_average / 2)"><i
+                                        class="fa-regular fa-star"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </main>
 
 
 
 </template>
 
 
-<style></style>
+<style>
+main {
+    background-color: rgb(36, 36, 36);
+    color: white;
+
+    & .container {
+        width: 90%;
+        margin: auto;
+
+        & .row {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            & .col {
+                width: calc(100% / 3);
+
+                & .card {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    & .poster {
+                        position: relative;
+                    }
+                    
+                    & .text {
+                        position: absolute;
+                        top: 0;
+                        background-color: black;
+                        width: 100%;
+                        height: 100%;
+                        display: none;
+                        
+                    }
+                    & .poster:hover {
+                        .text {
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+</style>
