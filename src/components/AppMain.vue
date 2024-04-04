@@ -11,6 +11,7 @@ export default {
         return {
             state,
             search: 'avatar',
+            prefixImage: 'https://image.tmdb.org/t/p/w342'
 
         }
     },
@@ -34,23 +35,27 @@ export default {
     <button @click="searchContent"> cerca </button>
 
 
-
+    <!-- show movie -->
     <div v-for="item in state.contentElementMovies">
         <div class="card">
+            <div><img :src="prefixImage + item.poster_path" alt=""></div>
             <div>{{ item.title }}</div>
             <div>{{ item.original_title }}</div>
             <div v-if="true"><lang-flag :iso="item.original_language" /></div>
-            <div v-else>{{item.original_language}}</div>
+            <div v-else>{{ item.original_language }}</div>
             <div>{{ item.vote_average }}</div>
         </div>
     </div>
 
+    <!-- show tv series -->
     <div v-for="item in state.contentElementTv">
         <div class="card">
+            <div><img :src="prefixImage + item.poster_path" alt=""></div>
+
             <div>{{ item.name }}</div>
             <div>{{ item.original_name }}</div>
             <div v-if="true"><lang-flag :iso="item.original_language" /></div>
-            <div v-else>{{item.original_language}}</div>
+            <div v-else>{{ item.original_language }}</div>
             <div>{{ item.vote_average }}</div>
         </div>
     </div>
