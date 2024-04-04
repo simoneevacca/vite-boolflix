@@ -10,7 +10,7 @@ export default {
     data() {
         return {
             state,
-            search: 'avatar',
+            search: '',
             prefixImage: 'https://image.tmdb.org/t/p/w342'
 
         }
@@ -31,8 +31,13 @@ export default {
 </script>
 
 <template>
-    <input type="text" v-model="search" @keyup.enter="searchContent">
-    <button @click="searchContent"> cerca </button>
+    <header>
+        <div class="logo">BOOLFLIX</div>
+        <div>
+            <input type="text" v-model="search" @keyup.enter="searchContent">
+            <button @click="searchContent"> cerca </button>
+        </div>
+    </header>
 
     <main>
         <!-- show movie -->
@@ -42,14 +47,18 @@ export default {
                     <div class="card">
                         <div class="poster"><img :src="prefixImage + item.poster_path" alt="">
                             <div class="text">
-                                <div>{{ item.title }}</div>
-                                <div>{{ item.original_title }}</div>
-                                <div v-if="true"><lang-flag :iso="item.original_language" /></div>
-                                <div v-else>{{ item.original_language }}</div>
-                                <div v-for="n in Math.round(item.vote_average / 2)"><i class="fa-solid fa-star"></i>
+                                <div><strong>Titolo: </strong>{{ item.title }}</div>
+                                <div><strong>Titolo originale: </strong>{{ item.original_title }}</div>
+                                <div v-if="true"><strong>Lingua: </strong><lang-flag :iso="item.original_language" />
                                 </div>
-                                <div v-for="n in 5 - Math.round(item.vote_average / 2)"><i
-                                        class="fa-regular fa-star"></i></div>
+                                <div v-else>{{ item.original_language }}</div>
+                                <div class="voto">
+                                    <strong>Voto: </strong>
+                                    <div v-for="n in Math.round(item.vote_average / 2)"><i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div v-for="n in 5 - Math.round(item.vote_average / 2)"><i
+                                            class="fa-regular fa-star"></i></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -67,13 +76,18 @@ export default {
                             <div class="text">
                                 <div>{{ item.name }}</div>
                                 <div>{{ item.original_name }}</div>
-                                <div v-if="true"><lang-flag :iso="item.original_language" /></div>
-                                <div v-else>{{ item.original_language }}</div>
-                                <div v-for="n in Math.round(item.vote_average / 2)"><i class="fa-solid fa-star"></i>
+                                <div v-if="true"><strong>Lingua: </strong><lang-flag :iso="item.original_language" />
                                 </div>
-                                <div v-for="n in 5 - Math.round(item.vote_average / 2)"><i
-                                        class="fa-regular fa-star"></i></div>
+                                <div v-else>{{ item.original_language }}</div>
+                                <div class="voto">
+                                    <strong>Voto: </strong>
+                                    <div v-for="n in Math.round(item.vote_average / 2)"><i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <div v-for="n in 5 - Math.round(item.vote_average / 2)"><i
+                                            class="fa-regular fa-star"></i></div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -87,8 +101,23 @@ export default {
 
 
 <style>
+
+header {
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+
+    & .logo {
+        color: red;
+        font-size: 3rem;
+    }
+}
+
+
 main {
-    background-color: rgb(36, 36, 36);
+    
     color: white;
 
     & .container {
@@ -108,11 +137,13 @@ main {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
+                    height: 510px;
+                    margin: 50px 0px 0px;
 
                     & .poster {
                         position: relative;
                     }
-                    
+
                     & .text {
                         position: absolute;
                         top: 0;
@@ -120,8 +151,22 @@ main {
                         width: 100%;
                         height: 100%;
                         display: none;
-                        
+                        padding: 1rem;
+
+                        & div {
+                            margin-bottom: 5px;
+                        }
+
+                        & .voto {
+                            display: flex;
+
+                            & .fa-star {
+                                color: yellow;
+                            }
+                        }
+
                     }
+
                     & .poster:hover {
                         .text {
                             display: block;
@@ -132,4 +177,7 @@ main {
         }
     }
 }
+
+
+
 </style>
