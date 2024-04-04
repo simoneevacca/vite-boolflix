@@ -11,7 +11,10 @@ export default {
         return {
             state,
             search: '',
-            prefixImage: 'https://image.tmdb.org/t/p/w342'
+            prefixImage: 'https://image.tmdb.org/t/p/w342',
+            errorMessageMovies: '',
+            errorMessageTv: ''
+
 
         }
     },
@@ -20,7 +23,12 @@ export default {
         searchContent() {
             state.GetContentMovies(`https://api.themoviedb.org/3/search/movie?api_key=41b23e11302057b0778ead19acd303ef&query=${this.search}&include_adult=false&language=it&page=1`)
             state.GetContentTv(`https://api.themoviedb.org/3/search/tv?api_key=41b23e11302057b0778ead19acd303ef&query=${this.search}&include_adult=false&language=it&page=1`)
-
+            if(state.contentElementMovies == 0){
+                this.errorMessageMovies = 'Nessun titolo disponibile'
+            }
+            if(state.contentElementTv == 0){
+                this.errorMessageTv = 'Nessun titolo disponibile'
+            }
         }
     },
 
@@ -44,12 +52,14 @@ export default {
         <div class="container">
             <h2>Film</h2>
             <div class="row">
-                <div class="col" v-for="item in state.contentElementMovies"  v-show="item.poster_path != null">
+                <div v-show="state.contentElementMovies.length == 0">{{ errorMessageMovies }}</div>
+                <div class="col" v-for="item in state.contentElementMovies" v-show="item.poster_path != null">
                     <div class="card">
                         <div class="poster"><img :src="prefixImage + item.poster_path" alt="">
                             <div class="text">
                                 <div><strong>Titolo: </strong>{{ item.title }}</div>
-                                <div><strong>Titolo originale: </strong>{{ item.original_title }}</div>
+                                <div v-show="item.original_title != item.title"><strong>Titolo originale: </strong>{{
+                item.original_title }}</div>
                                 <div v-if="true"><strong>Lingua: </strong><lang-flag :iso="item.original_language" />
                                 </div>
                                 <div v-else>{{ item.original_language }}</div>
@@ -71,13 +81,13 @@ export default {
         <div class="container">
             <h2>Serie Tv</h2>
             <div class="row">
-
-                <div class="col" v-for="item in state.contentElementTv"  v-show="item.poster_path != null">
+                <div v-show="state.contentElementTv.length == 0">{{ errorMessageTv }}</div>
+                <div class="col" v-for="item in state.contentElementTv" v-show="item.poster_path != null">
                     <div class="card">
-                        <div  class="poster"><img :src="prefixImage + item.poster_path" alt="">
+                        <div class="poster"><img :src="prefixImage + item.poster_path" alt="">
                             <div class="text">
-                                <div>{{ item.name }}</div>
-                                <div>{{ item.original_name }}</div>
+                                <div><strong>Titolo: </strong>{{ item.name }}</div>
+                                <div v-show="item.original_name != item.name"><strong>Titolo originale: </strong>{{item.original_name }}</div>
                                 <div v-if="true"><strong>Lingua: </strong><lang-flag :iso="item.original_language" />
                                 </div>
                                 <div v-else>{{ item.original_language }}</div>
@@ -89,7 +99,6 @@ export default {
                                             class="fa-regular fa-star"></i></div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -103,7 +112,6 @@ export default {
 
 
 <style>
-
 header {
     background-color: black;
     display: flex;
@@ -115,16 +123,18 @@ header {
         color: red;
         font-size: 3rem;
     }
-    & input, button {
+
+    & input,
+    button {
         height: 30px;
         font-size: 1rem;
     }
-    
+
 }
 
 
 main {
-    
+
     color: white;
 
     & .container {
@@ -135,10 +145,11 @@ main {
             font-size: 2rem;
             padding: 2rem;
         }
+
         & .row {
             width: 100%;
             display: flex;
-            
+
             flex-wrap: wrap;
 
             & .col {
@@ -188,7 +199,4 @@ main {
         }
     }
 }
-
-
-
 </style>

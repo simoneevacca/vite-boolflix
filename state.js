@@ -34,7 +34,7 @@ export const state = reactive({
             this.contents.results.forEach(element => {
                 this.contentElementTv.push(element)
             })
-            console.log(this.contentElementTv);
+            console.log(this.contentElementTv.length);
         })
 }
 })
