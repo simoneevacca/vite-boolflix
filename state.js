@@ -15,26 +15,26 @@ export const state = reactive({
         axios.get(url)
             .then(response => {
                 this.contents = response.data
-                
-                console.log(this.contents);
+
+
                 this.contents.results.forEach(element => {
                     this.contentElementMovies.push(element)
                 })
-                console.log(this.contentElementMovies);
             })
-        },
-        
-        GetContentTv(url) {
-        this.contentElementTv = []
-        axios.get(url)
-            .then(response => {
-                this.contents = response.data
+    },
 
-                console.log(this.contents);
-                this.contents.results.forEach(element => {
-                    this.contentElementTv.push(element)
-                })
-                console.log(this.contentElementTv);
+
+    GetContentTv(url) {
+    this.contentElementTv = []
+        axios.get(url)
+        .then(response => {
+            this.contents = response.data
+
+            console.log(this.contents);
+            this.contents.results.forEach(element => {
+                this.contentElementTv.push(element)
             })
-    }
+            console.log(this.contentElementTv);
+        })
+}
 })

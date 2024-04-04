@@ -42,8 +42,9 @@ export default {
     <main>
         <!-- show movie -->
         <div class="container">
+            <h2>Film</h2>
             <div class="row">
-                <div class="col" v-for="item in state.contentElementMovies">
+                <div class="col" v-for="item in state.contentElementMovies"  v-show="item.poster_path != null">
                     <div class="card">
                         <div class="poster"><img :src="prefixImage + item.poster_path" alt="">
                             <div class="text">
@@ -68,11 +69,12 @@ export default {
 
         <!-- show tv series -->
         <div class="container">
+            <h2>Serie Tv</h2>
             <div class="row">
 
-                <div class="col" v-for="item in state.contentElementTv">
+                <div class="col" v-for="item in state.contentElementTv"  v-show="item.poster_path != null">
                     <div class="card">
-                        <div class="poster"><img :src="prefixImage + item.poster_path" alt="">
+                        <div  class="poster"><img :src="prefixImage + item.poster_path" alt="">
                             <div class="text">
                                 <div>{{ item.name }}</div>
                                 <div>{{ item.original_name }}</div>
@@ -113,6 +115,11 @@ header {
         color: red;
         font-size: 3rem;
     }
+    & input, button {
+        height: 30px;
+        font-size: 1rem;
+    }
+    
 }
 
 
@@ -124,10 +131,14 @@ main {
         width: 90%;
         margin: auto;
 
+        & h2 {
+            font-size: 2rem;
+            padding: 2rem;
+        }
         & .row {
             width: 100%;
             display: flex;
-            justify-content: space-between;
+            
             flex-wrap: wrap;
 
             & .col {
