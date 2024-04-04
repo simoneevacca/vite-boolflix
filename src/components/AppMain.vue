@@ -44,6 +44,8 @@ export default {
             <div v-if="true"><lang-flag :iso="item.original_language" /></div>
             <div v-else>{{ item.original_language }}</div>
             <div>{{ Math.round(item.vote_average/2) }}</div>
+            <div v-for="n in Math.round(item.vote_average/2)">{{ n }}</div>
+
         </div>
     </div>
 
@@ -56,6 +58,7 @@ export default {
             <div v-if="true"><lang-flag :iso="item.original_language" /></div>
             <div v-else>{{ item.original_language }}</div>
             <div>{{ Math.round(item.vote_average/2) }}</div>
+            <div v-for="n in Math.round(item.vote_average/2)">{{ n }}</div>
         </div>
     </div>
 
