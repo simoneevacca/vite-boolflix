@@ -10,6 +10,8 @@ export const state = reactive({
     contentElementTv: [],
     cast: [],
     castNameMovie: [],
+    castNameTv: [],
+
     
 
 
@@ -36,7 +38,7 @@ export const state = reactive({
             })
     },
 
-    getCast(url) {
+    getCastMovie(url) {
         this.castNameMovie = []
         axios.get(url)
         .then(response => {
@@ -49,7 +51,22 @@ export const state = reactive({
             })
     },
 
+    getCastTv(url) {
+        this.castNameTv = []
+        axios.get(url)
+        .then(response => {
+            this.cast = response.data.cast
+            console.log(this.cast);
+            for (let i = 0; i < 5; i++) {    
+                this.castNameTv.push(this.cast[i].name)     
+            }
+            console.log(this.castNameTv);          
+                
+            })
+    },
+
     clearCast() {
         this.castNameMovie = []
+        this.castNameTv = []
     }
 })

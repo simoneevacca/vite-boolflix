@@ -72,11 +72,10 @@ export default {
                                     <strong>Voto: </strong>
                                     <div v-for="n in Math.round(item.vote_average / 2)"><i class="fa-solid fa-star"></i>
                                     </div>
-                                    <div v-for="n in 5 - Math.round(item.vote_average / 2)"><i
-                                            class="fa-regular fa-star"></i></div>
+                                    <div v-for="n in 5 - Math.round(item.vote_average / 2)"><i class="fa-regular fa-star"></i></div>
                                 </div>
                                 <p>{{item.overview}}</p>
-                                <strong @click="state.getCast('https://api.themoviedb.org/3/movie/' + item.id + '/credits?api_key=41b23e11302057b0778ead19acd303ef')">Cast:</strong>
+                                <strong @click="state.getCastMovie('https://api.themoviedb.org/3/movie/' + item.id + '/credits?api_key=41b23e11302057b0778ead19acd303ef')">Cast:</strong>
                                 <ul>
                                     <li v-for="person in state.castNameMovie">{{ person }}</li>
                                 </ul>
@@ -93,7 +92,7 @@ export default {
             <div class="row">
                 <div v-show="state.contentElementTv.length == 0">{{ errorMessageTv }}</div>
                 <div class="col" v-for="item in state.contentElementTv" v-show="item.poster_path != null">
-                    <div class="card">
+                    <div class="card" @mouseleave="state.clearCast">
                         <div class="poster"><img :src="prefixImage + item.poster_path" alt="">
                             <div class="text"><div><strong>Titolo: </strong>{{ item.name }}</div>
                                 <div v-show="item.original_name != item.name"><strong>Titolo originale: </strong>{{ item.original_name }}</div>
@@ -106,6 +105,10 @@ export default {
                                     <div v-for="n in 5 - Math.round(item.vote_average / 2)"><i class="fa-regular fa-star"></i></div>
                                 </div>
                                 <p>{{item.overview}}</p>
+                                <strong @click="state.getCastTv('https://api.themoviedb.org/3/tv/' + item.id + '/credits?api_key=41b23e11302057b0778ead19acd303ef')">Cast:</strong>
+                                <ul>
+                                    <li v-for="person in state.castNameTv">{{ person }}</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -169,12 +172,12 @@ main {
                     align-items: center;
                     height: 510px;
                     margin: 50px 0px 0px;
-
+                    
                     & .poster {
                         position: relative;
                         overflow: auto;
-                        
                         background-color: black;
+                        
                         
                     }
 
