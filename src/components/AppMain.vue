@@ -175,7 +175,7 @@ main {
                     
                     & .poster {
                         position: relative;
-                        overflow: auto;
+                        
                         background-color: black;
                         
                         
@@ -200,6 +200,11 @@ main {
                             & .fa-star {
                                 color: yellow;
                             }
+                        }
+
+                        & p {
+                            height: 50%;
+                            overflow: auto;
                         }
 
                     }
