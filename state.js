@@ -39,13 +39,17 @@ export const state = reactive({
     getCast(url) {
         this.castNameMovie = []
         axios.get(url)
-            .then(response => {
-                this.cast = response.data.cast
-                for (let i = 0; i < 5; i++) {    
-                    this.castNameMovie.push(this.cast[i].name)     
-                }
-                console.log(this.castNameMovie);          
+        .then(response => {
+            this.cast = response.data.cast
+            for (let i = 0; i < 5; i++) {    
+                this.castNameMovie.push(this.cast[i].name)     
+            }
+            console.log(this.castNameMovie);          
                 
             })
+    },
+
+    clearCast() {
+        this.castNameMovie = []
     }
 })
