@@ -8,6 +8,9 @@ export const state = reactive({
     contents: [],
     contentElementMovies: [],
     contentElementTv: [],
+    cast: [],
+    castNameMovie: [],
+    
 
 
     GetContentMovies(url) {
@@ -15,8 +18,6 @@ export const state = reactive({
         axios.get(url)
             .then(response => {
                 this.contents = response.data
-
-
                 this.contents.results.forEach(element => {
                     this.contentElementMovies.push(element)
                 })
@@ -25,16 +26,26 @@ export const state = reactive({
 
 
     GetContentTv(url) {
-    this.contentElementTv = []
+        this.contentElementTv = []
         axios.get(url)
-        .then(response => {
-            this.contents = response.data
-
-            console.log(this.contents);
-            this.contents.results.forEach(element => {
-                this.contentElementTv.push(element)
+            .then(response => {
+                this.contents = response.data
+                this.contents.results.forEach(element => {
+                    this.contentElementTv.push(element)
+                })
             })
-            console.log(this.contentElementTv.length);
-        })
-}
+    },
+
+    getCast(url) {
+        this.castNameMovie = []
+        axios.get(url)
+            .then(response => {
+                this.cast = response.data.cast
+                for (let i = 0; i < 5; i++) {    
+                    this.castNameMovie.push(this.cast[i].name)     
+                }
+                console.log(this.castNameMovie);          
+                
+            })
+    }
 })
